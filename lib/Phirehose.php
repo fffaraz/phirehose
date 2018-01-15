@@ -865,7 +865,3 @@ abstract class Phirehose
   }
 
 } // End of class
-
-class PhirehoseException extends Exception {}
-class PhirehoseNetworkException extends PhirehoseException {}
-class PhirehoseConnectLimitExceeded extends PhirehoseException {}
