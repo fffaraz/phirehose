@@ -1,6 +1,7 @@
 <?php
-require_once('OauthPhirehose.php');
+namespace Phirehose;
 
+use Phirehose\OauthPhirehose;
 /**
 * This class just exists to have a different default method
 *   (i.e. more for backwards-compatibility than anything)

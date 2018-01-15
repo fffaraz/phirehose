@@ -1,6 +1,7 @@
 <?php
-require_once('Phirehose.php');
+namespace Phirehose;
 
+use Phirehose\Phirehose;
 /**
 *
 *

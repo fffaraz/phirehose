@@ -1,4 +1,7 @@
 <?php
+namespace Phirehose;
+
+use Phirehose\Exceptions\PhirehoseConnectLimitExceeded;
 /**
  * A class that makes it easy to connect to and consume the Twitter stream via the Streaming API.
  *
