@@ -400,7 +400,7 @@ abstract class Phirehose
    *
    * @see handleStatus()
    * @param boolean $reconnect Reconnects as per recommended
-   * @throws ErrorException
+   * @throws \Phirehose\Exceptions\PhirehoseException
    */
   public function consume($reconnect = TRUE)
   {
@@ -576,7 +576,7 @@ abstract class Phirehose
   
   /**
    * Connects to the stream URL using the configured method.
-   * @throws ErrorException
+   * @throws \Phirehose\Exceptions\PhirehoseException
    */
   protected function connect()
   {
