@@ -611,7 +611,6 @@ abstract class Phirehose
       // Filter takes additional parameters
       if (($this->method == self::METHOD_FILTER || $this->method == self::METHOD_USER) && ! empty($this->trackWords)) {
         $requestParams['track'] = implode(',', $this->trackWords);
-		var_dump($requestParams['track']);
       }
       if ( ($this->method == self::METHOD_FILTER || $this->method == self::METHOD_SITE)
             && ! empty($this->followIds)) {
