@@ -232,8 +232,8 @@ abstract class Phirehose
    */
   public function setTrack(array $trackWords)
   {
-    $trackWords = ($trackWords === NULL) ? array() : $trackWords;
-    sort(array_unique($trackWords)); // Non-optimal, but necessary
+    $trackWords = ($trackWords === NULL) ? array() : array_unique($trackWords);
+    sort($trackWords); // Non-optimal, but necessary
     if ($this->trackWords != $trackWords) {
       $this->filterChanged = TRUE;
     }
