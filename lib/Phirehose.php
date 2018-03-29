@@ -689,7 +689,23 @@ abstract class Phirehose
       $this->log($s);
       
       // First line is response
-      list($httpVer, $httpCode, $httpMessage) = preg_split('/\s+/', trim(fgets($this->conn, 1024)), 3);
+      //list($httpVer, $httpCode, $httpMessage) = preg_split('/\s+/', trim(fgets($this->conn, 1024)), 3);
+      $data = trim(fgets($this->conn, 1024));
+      $items = preg_split('/\s+/', $data, 3);
+      if(count($items) !== 3)
+      {
+        print_r($items);
+        throw new Exception("Undefined offset");
+        sleep(10);
+        continue;
+      }
+      else
+      {
+        $httpVer = $items[0];
+        $httpCode = $items[1];
+        $httpMessage = $items[2];
+      }
+      
       
       // Response buffers
       $respHeaders = $respBody = '';
