@@ -692,18 +692,18 @@ abstract class Phirehose
       //list($httpVer, $httpCode, $httpMessage) = preg_split('/\s+/', trim(fgets($this->conn, 1024)), 3);
       $data = trim(fgets($this->conn, 1024));
       $items = preg_split('/\s+/', $data, 3);
-      if(count($items) !== 3)
-      {
-        print_r($items);
-        throw new Exception("Undefined offset");
-        sleep(10);
-        continue;
-      }
-      else
+      if(count($items) == 3)
       {
         $httpVer = $items[0];
         $httpCode = $items[1];
         $httpMessage = $items[2];
+      }
+      else
+      {
+        print_r($items);
+        throw new Exception("Undefined offset: " . $data);
+        sleep(10);
+        continue;
       }
       
       
