@@ -150,14 +150,14 @@ abstract class Phirehose
   protected $idleReconnectTimeout = 90;
   protected $avgPeriod = 60;
   protected $status_length_base = 10;
-  protected $userAgent       = 'Phirehose/1.0RC +https://github.com/fennb/phirehose';
+  protected $userAgent = 'Phirehose/2.0 +https://github.com/fffaraz/phirehose';
   protected $filterCheckMin = 5;
   protected $filterUpdMin   = 120;
-  protected $tcpBackoff      = 1;
+  protected $tcpBackoff     = 1;
   protected $tcpBackoffMax  = 16;
-  protected $httpBackoff  = 10;
-  protected $httpBackoffMax  = 240;
-  protected $hostPort = 80;
+  protected $httpBackoff    = 10;
+  protected $httpBackoffMax = 240;
+  protected $hostPort       = 80;
   protected $secureHostPort = 443;
 
   /**
@@ -187,8 +187,8 @@ abstract class Phirehose
     $this->format = $format;
     $this->lang = $lang;
    switch($method){
-        case self::METHOD_USER:$this->URL_BASE = 'https://userstream.twitter.com/1.1/';break;
-        case self::METHOD_SITE:$this->URL_BASE = 'https://sitestream.twitter.com/1.1/';break;
+        case self::METHOD_USER: $this->URL_BASE = 'https://userstream.twitter.com/1.1/'; break;
+        case self::METHOD_SITE: $this->URL_BASE = 'https://sitestream.twitter.com/1.1/'; break;
         default:break;  //Stick to the default
         }
   }
@@ -687,19 +687,24 @@ abstract class Phirehose
 
       fwrite($this->conn, $s);
       $this->log($s);
+      fflush($this->conn);
 
       // First line is response
       //list($httpVer, $httpCode, $httpMessage) = preg_split('/\s+/', trim(fgets($this->conn, 1024)), 3);
       $data = fgets($this->conn, 1024);
+
+      if(strlen($data) < 1) {
+        throw new \Exception("Empty response");
+        sleep(10);
+        continue;
+      }
+
       $items = preg_split('/\s+/', trim($data), 3);
-      if(count($items) == 3)
-      {
+      if(count($items) == 3) {
         $httpVer = $items[0];
         $httpCode = $items[1];
         $httpMessage = $items[2];
-      }
-      else
-      {
+      } else {
         print_r($items);
         throw new \Exception("Undefined offset: " . $data . " (size: " . strlen($data) . ")");
         sleep(10);
