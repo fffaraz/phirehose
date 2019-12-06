@@ -189,8 +189,6 @@ abstract class Phirehose
    switch($method){
         case self::METHOD_USER:$this->URL_BASE = 'https://userstream.twitter.com/1.1/';break;
         case self::METHOD_SITE:$this->URL_BASE = 'https://sitestream.twitter.com/1.1/';break;
-        case self::METHOD_SAMPLE:$this->URL_BASE = 'https://api.twitter.com/labs/1/tweets/stream/';break;
-        case self::METHOD_FILTER:$this->URL_BASE = 'https://api.twitter.com/labs/1/tweets/stream/';break;
         default:break;  //Stick to the default
         }
   }
@@ -597,7 +595,7 @@ abstract class Phirehose
       }
 
       // Construct URL/HTTP bits
-      $url = $this->URL_BASE . $this->method; // . '.' . $this->format;
+      $url = $this->URL_BASE . $this->method . '.' . $this->format;
       $urlParts = parse_url($url);
 
       // Setup params appropriately
