@@ -690,8 +690,8 @@ abstract class Phirehose
 
       // First line is response
       //list($httpVer, $httpCode, $httpMessage) = preg_split('/\s+/', trim(fgets($this->conn, 1024)), 3);
-      $data = trim(fgets($this->conn, 1024));
-      $items = preg_split('/\s+/', $data, 3);
+      $data = fgets($this->conn, 1024);
+      $items = preg_split('/\s+/', trim($data), 3);
       if(count($items) == 3)
       {
         $httpVer = $items[0];
