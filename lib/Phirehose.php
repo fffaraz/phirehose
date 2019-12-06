@@ -701,7 +701,7 @@ abstract class Phirehose
       else
       {
         print_r($items);
-        throw new \Exception("Undefined offset: " . $data);
+        throw new \Exception("Undefined offset: " . $data . " (size: " . strlen($data) . ")");
         sleep(10);
         continue;
       }
